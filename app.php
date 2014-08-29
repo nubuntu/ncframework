@@ -5,7 +5,7 @@
       'driver'=>'mysql',
       'host'=>'localhost',
       'username'=>'root',
-      'password=>'root',
+      'password'=>'root',
       'database'=>'',
       'connection'=>null,
       'q'=>'',
