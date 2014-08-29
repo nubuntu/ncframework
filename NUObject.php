@@ -69,11 +69,11 @@ class NUObject
         unset(self::$_classMethods[$property]);
         unset(self::$_classProperties[$property]);
     }
- 
-    public function __call($method, $args)
-    {
-        $args = array($this) + $args;
- 
+
+    public function __call($method, $args){	
+	
+        $args = array_merge(array($this),$args);
+		//print_r($args);
         if (array_key_exists($method, $this->_instanceMethods)) {
             return call_user_func_array($this->_instanceMethods[$method], $args);
         }
