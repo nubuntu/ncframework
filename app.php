@@ -24,12 +24,26 @@
       },
 	  'query'=>function($self){
 		$self->recordset = $self->connection->query($self->q);
-		return $self->recordset;	  
+		return $self->connection->affected_rows;	  
+	  },
+	  'getResult'=>function($self){
+		if($self->query()<1){
+			return null;
+		}
+		$ret = null;
+		if($res=$self->recordset->fetch_row()){
+			$ret=$res[0];
+		}
+		$cur->close();
+		$self->connection->close();
+		return $ret;	  
 	  },
 	  'getRow'=>function($self){
-		$cur = $self->query();
+		if($self->query()<1){
+			return array();
+		}
 		$ret=array();
-		if ($object = $cur->fetch_object()) {
+		if ($object = $self->recordset->fetch_object()) {
 			$ret = $object;
 		}
 		$cur->close();
@@ -37,9 +51,11 @@
 		return $ret;	  
 	  },
 	  'getRows'=>function($self){
-		$cur = $self->query();
+		if($self->query()<1){
+			return array();
+		}
 		$array = array();
-		while ($row = $cur->fetch_object()) {
+		while ($row = $self->recordset->fetch_object()) {
 				$array[] = $row;
 		}
 		$cur->close();

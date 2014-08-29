@@ -11,8 +11,7 @@ include("../app.php");
       'database'=>'nucrud'
     ))
   ));
-  $q = "select * from student where id=1";
-  $testapp->db->setQuery($q);
-  $rows = $testapp->db->getRow();
-  print_r($rows);
+  $q = "update student set name='noer' where id=1";
+  $app->db->setQuery($q);
+  echo $app->db->query();
 ?>
