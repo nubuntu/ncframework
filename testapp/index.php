@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-include("../app.php");
+include("../ncframework.php");
   $testapp = new NUObject(array(
     'db'=>new NUObject(array(
       'driver'=>'mysql',
@@ -11,7 +11,9 @@ include("../app.php");
       'database'=>'nucrud'
     ))
   ));
-  $q = "update student set name='noer' where id=1";
+  //print_r($app->db);
+  $q = "select * from student";
   $app->db->setQuery($q);
-  echo $app->db->query();
+  $rows = $app->db->getRows();
+  print_r($rows)
 ?>
