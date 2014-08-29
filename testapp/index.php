@@ -11,7 +11,7 @@ include("../ncframework.php");
       'database'=>'nucrud'
     ))
   ));
-  //print_r($app->db);
+  $app->run();
   $q = "select * from student";
   $app->db->setQuery($q);
   $rows = $app->db->getRows();
